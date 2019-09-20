@@ -99,7 +99,7 @@ public class UserAuthenticationTokenFilter extends OncePerRequestFilter {
                     return;
                 }
             }
-            response.sendRedirect(ShopConstants.SSO_URL);
+            response.sendRedirect(ShopConstants.SSO_URL + "?service=");
             return;
         }
         filterChain.doFilter(request,response);

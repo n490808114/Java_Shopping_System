@@ -1,0 +1,63 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>ShopWeb认证中心</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.form.min.js"></script>
+    <script src="js/json2.js"></script>
+    <script>
+        var token = localStorage.getItem("token");
+        if (token == null){cannotGotToken();}else{gotToken();}
+        function gotToken(){
+
+        }
+        function cannotGotToken(){
+
+        }
+        $("#login").click(function(){
+            $("#form").ajaxSubmit({
+                url:"/login",
+                type:"GET",
+                success:function(data,xhr){
+                    if(xhr.status == 200){
+                        localStorage.setItem("token",data["token"]);
+                        callback();
+                    }else{xhr.status == 403}{
+                        alert(data);
+                    }
+                }
+            })
+        })
+        $("#register").click(function(){
+            $("#form").ajaxSubmit({
+                url:"/register",
+                type:"GET",
+                success:function(data){
+                    if(xhr.status == 200){
+                        localStorage.setItem("token",data["token"]);
+                        callback();
+                    }else{xhr.status == 403}{
+                        alert(data);
+                    }
+                }
+            })
+        })
+        function callback(){
+
+        }
+    </script>
+</head>
+<body>
+    <form id="form">
+        <fieldset>
+            <label>用户名：</label>
+            <input type="text" name="username">
+            <label>密码：</label>
+            <input type="password" name="password">
+        </fieldset>
+        <input type="submit" id="login" value="登录">
+        <input type="submit" id="register" value="注册">
+    </form>
+
+</body>
+</html>
