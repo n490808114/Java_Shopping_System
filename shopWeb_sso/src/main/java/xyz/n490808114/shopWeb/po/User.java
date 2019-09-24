@@ -1,8 +1,9 @@
 package xyz.n490808114.shopWeb.po;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.List;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,16 +20,16 @@ public class User implements UserDetails {
     private String password;
     private String email;
     @JsonIgnore
-    private String roles;
+    private Role[] roles;
     private String avatar;
 
     
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(roles.split("#"))
-        .map(SimpleGrantedAuthority::new)
-        .collect(Collectors.toList());
+        List<GrantedAuthority> list = new ArrayList<>();
+        for (Role role : roles) {list.add(new SimpleGrantedAuthority(role.getName()));}
+        return list;
     }
 
     @Override
@@ -93,7 +94,7 @@ public class User implements UserDetails {
     /**
      * @param roles the roles to set
      */
-    public void setRoles(String roles) {
+    public void setRoles(Role[] roles) {
         this.roles = roles;
     }
     /**
@@ -129,7 +130,7 @@ public class User implements UserDetails {
     /**
      * @return the roles
      */
-    public String getRoles() {
+    public Role[] getRoles() {
         return roles;
     }
 
