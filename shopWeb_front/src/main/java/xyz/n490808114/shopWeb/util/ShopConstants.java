@@ -4,7 +4,8 @@ public class ShopConstants{
 
     public static final String SSO_URL = "http://127.0.0.1:8081";
     public static final String SSO_CHECK_URL = SSO_URL+"/check";
-    public static final String SSO_TOKEN = "Bearer MIJETJEIT.etetwewt.wetwrtwe";
+    public static final String THIS_SERVICE_URL = "http://127.0.0.1:8080";
+    public static final String THIS_SERVICE_TOKEN = "Bearer MIJETJEIT.etetwewt.wetwrtwe";
 
     public static final String SESSION_USER = "USER IN SESSION_ID";
     
