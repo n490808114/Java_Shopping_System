@@ -1,0 +1,13 @@
+body{
+    background-color: antiquewhite;
+}
+#form{
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    width: 20%;
+    top:100px;
+}
+#form fieldset{
+    width: 100%;
+}
