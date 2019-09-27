@@ -28,7 +28,6 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `roles` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)

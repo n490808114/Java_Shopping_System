@@ -9,16 +9,14 @@ public class Role implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     
-    private Integer id;
+    private String id;
     private String name;
     private String remark;
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
+
     /**
      * @param name the name to set
      */
@@ -31,12 +29,11 @@ public class Role implements Serializable {
     public void setRemark(String remark) {
         this.remark = remark;
     }
-    /**
-     * @return the id
-     */
-    public Integer getId() {
+
+    public String getId() {
         return id;
     }
+
     /**
      * @return the name
      */

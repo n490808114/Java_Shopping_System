@@ -1,5 +1,6 @@
 package xyz.n490808114.shopWeb.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,10 +12,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private String id;
     private String name;
     private String username;
     private String password;
@@ -73,12 +74,11 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
+
+    public void setId(String id) {
         this.id = id;
     }
+
     /**
      * @param name the name to set
      */
@@ -115,12 +115,11 @@ public class User implements UserDetails {
     public String getEmail() {
         return email;
     }
-    /**
-     * @return the id
-     */
-    public Integer getId() {
+
+    public String getId() {
         return id;
     }
+
     /**
      * @return the name
      */
