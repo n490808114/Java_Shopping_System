@@ -33,15 +33,17 @@ public class UserAutherizationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        //获取Request头部中的Token
+        // 获取Request头部中的Token
         String autherization = request.getHeader("Autherization");
         String token = null;
         if(autherization != null && autherization.startsWith("Bearer ")){
             token = autherization.substring(7);
         }
+        // 如果token不为空，那么尝试获取token对应的User
         if(token != null){
             String userId = service.getUserIdByToken(token);
             User user = service.getUserById(userId);
+            // 如果User获取到就把User的Role加载到SecurityContext中
             if(user != null){
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -49,6 +51,7 @@ public class UserAutherizationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }
+        // 继续执行其他filter
         filterChain.doFilter(request,response);
     }
     
