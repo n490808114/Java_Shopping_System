@@ -12,6 +12,6 @@ public interface ShopWebService {
     public void removeCache(String userId);
     public String createTokenByUser(User user);
     public User getUserById(String userId);
-
+    public boolean register(User user);
     public boolean login(String username,String password);
 }

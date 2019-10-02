@@ -12,12 +12,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Size;
+
 public class User implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Null
     private String id;
     private String name;
+    @Size(min = 8,max = 255)
     private String username;
+    @Size(min = 8,max = 255)
     private String password;
     private String email;
     @JsonIgnore

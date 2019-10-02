@@ -52,10 +52,6 @@ public class ShopWebServiceImpl implements ShopWebService{
     }
 
     @Override
-    public User getUserById(String userId) {
-        return userDao.findUserById(userId);
-    }
-
     @Transactional
     public boolean register(User user)  {
         user.setId(UUID.randomUUID().toString());
@@ -64,11 +60,22 @@ public class ShopWebServiceImpl implements ShopWebService{
             if(roleDao.getRoleById(role.getId()) != null){
                 roleDao.addUserRole(user.getId(),role.getId());
             }else{
-                throw new NullPointerException("用户权限"+ role.getId()+" : "
+                throw new NullPointerException("用户权限 "+ role.getId()+" : "
                                                         + role.getName() +"找不到");
             }
         }
         return true;
+    }
+
+
+    @Override
+    public boolean login(String username, String password) {
+        return userDao.login(username, password) != null;
+    }
+
+    @Override
+    public User getUserById(String userId) {
+        return userDao.findUserById(userId);
     }
 
 

@@ -1,6 +1,9 @@
 package xyz.n490808114.shopWeb.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,16 +15,15 @@ import xyz.n490808114.shopWeb.po.User;
 import xyz.n490808114.shopWeb.service.ShopWebService;
 import xyz.n490808114.shopWeb.util.ShopConstants;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class LoginController {
     @Autowired
     @Qualifier("shopWebServiceImpl")
     private ShopWebService service;
+
+    private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
     /**
      * 如果已经有User,说明之前登陆过，那么跳转回之前的网页并加上User的Token
      * 如果没有User,说明未登录或者已过期，那么跳转到登录页面
@@ -54,10 +56,32 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
         }
     }
+
+
     @PostMapping("/register")
     @ResponseBody
     public ResponseEntity<Map<String,String>> register(@RequestBody User user){
-        Objects.hash("123");
-        return null;
+
+        //使用BeanValidator验证User,如果验证有问题，返回给前端
+        Set<ConstraintViolation<User>> set = validator.validate(user);
+        Map<String,String> result = new HashMap<>();
+        if(set.size() != 0){
+            for(ConstraintViolation<User> constraintViolation : set){
+                result.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        }
+        // 如果user没有问题，那么尝试提交，
+        try{
+            service.register(user);
+        }catch (NullPointerException nullEx){
+            result.put("role",nullEx.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        }catch (RuntimeException ex){
+            result.put("error",ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        }
+        result.put("message","注册成功");
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }
