@@ -6,12 +6,11 @@ import xyz.n490808114.shopWeb.po.User;
 
 @Service
 public interface ShopWebService {
-
     public String getUserIdByToken(String token);
     public String getCache(String userId);
     public void removeCache(String userId);
     public String createTokenByUser(User user);
     public User getUserById(String userId);
-    public boolean register(User user);
+    public void register(User user);
     public boolean login(String username,String password);
 }

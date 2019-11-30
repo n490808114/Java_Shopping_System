@@ -26,7 +26,7 @@ import xyz.n490808114.shopWeb.util.ShopConstants;
  * 3. 各分系统客户端获取SSO的登录页面，此时头部不带有Token,不认证角色，仅可访问登录界面并下发Token
  * 4. 各分系统客户端获取SSO的登录页面，此时头部带有Token,认证角色
  */
-public class UserAutherizationFilter extends OncePerRequestFilter {
+public class UserAuthorizationFilter extends OncePerRequestFilter {
     @Autowired
     ShopWebService service;
     @Override
@@ -34,10 +34,10 @@ public class UserAutherizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         // 获取Request头部中的Token
-        String autherization = request.getHeader("Autherization");
+        String authorization = request.getHeader("Authorization");
         String token = null;
-        if(autherization != null && autherization.startsWith("Bearer ")){
-            token = autherization.substring(7);
+        if(authorization != null && authorization.startsWith("Bearer ")){
+            token = authorization.substring(7);
         }
         // 如果token不为空，那么尝试获取token对应的User
         if(token != null){

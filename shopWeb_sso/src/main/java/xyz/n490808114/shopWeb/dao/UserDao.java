@@ -1,7 +1,5 @@
 package xyz.n490808114.shopWeb.dao;
 
-import javax.annotation.Resource;
-
 import org.apache.ibatis.annotations.*;
 
 import org.apache.ibatis.mapping.FetchType;
@@ -29,6 +27,6 @@ public interface UserDao{
     User login(String username,String password);
 
     @InsertProvider(value = UserDaoProvider.class,method = "addUser")
-    int addUser(User user);
+    void addUser(User user);
 
 }

@@ -1,7 +1,6 @@
 package xyz.n490808114.shopWeb.dao;
 
 import org.apache.ibatis.jdbc.SQL;
-import xyz.n490808114.shopWeb.po.Role;
 import xyz.n490808114.shopWeb.po.User;
 import xyz.n490808114.shopWeb.util.ShopConstants;
 

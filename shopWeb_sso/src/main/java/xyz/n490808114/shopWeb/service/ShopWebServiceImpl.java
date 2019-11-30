@@ -51,7 +51,7 @@ public class ShopWebServiceImpl implements ShopWebService{
 
     @Override
     @Transactional
-    public boolean register(User user)  {
+    public void register(User user)  {
         user.setId(UUID.randomUUID().toString());
         userDao.addUser(user);
         for(Role role : user.getRoles()){
@@ -62,14 +62,9 @@ public class ShopWebServiceImpl implements ShopWebService{
                                                         + role.getName() +"找不到");
             }
         }
-        return true;
     }
 
 
-    @Override
-    public boolean login(String username, String password) {
-        return userDao.login(username, password) != null;
-    }
 
     @Override
     public User getUserById(String userId) {
