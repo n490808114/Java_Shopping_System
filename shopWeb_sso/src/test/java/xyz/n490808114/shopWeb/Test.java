@@ -1,20 +1,12 @@
 package xyz.n490808114.shopWeb;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Test{
     public static void main(String[] args) {
-        int[] arr = {1,3,5};
-        System.out.println(arr[0]);
-        change(arr);
-        System.out.println(arr[0]);
-        String a = "123";
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("1");
-        stringBuffer.append("2");
-        stringBuffer.append("3");
-        System.out.println(a.contentEquals(stringBuffer));
+        Integer i = 1;
+        Map<String,String> a = new HashMap<>();
+    }
 
-    }
-    private static void change(int[] arr){
-        arr[0] = 200;
-    }
 }
